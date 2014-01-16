@@ -1,38 +1,35 @@
-/* RESET */
-html, body {
-    height: 100%;
-    overflow:auto;
-}
+/*Ensure our styles are properly set */
+
 #sitecuesFallback h3 {
     font-size: 1.17em;
-    margin:5px 0 10px;
-	}
-#sitecuesFallback a{
+    margin: 5px 0 10px;
+}
+#sitecuesFallback a {
 	text-decoration:none;
-	}
-#sitecuesFallback img{
-	margin:0;
-	padding:0;
-	border: 0; /* 1 */
-    -ms-interpolation-mode: bicubic; /* 2 */
-	}
+}
+#sitecuesFallback img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+            -ms-interpolation-mode: bicubic;
+}
 #sitecuesFallback p {
     margin: 1em 0;
 }
-#sitecuesFallback button{
-    font-size: 100%; /* 1 */
-    margin: 0; /* 2 */
-    vertical-align: baseline; /* 3 */
-    *vertical-align: middle; /* 3 */
+#sitecuesFallback button {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
     line-height: normal;
     text-transform: none;
 }
 #sitecuesFallback button,
 #sitecuesFallback html input[type="button"]
 #sitecuesFallback input[type="submit"] {
-    -webkit-appearance: button; /* 2 */
-    cursor: pointer; /* 3 */
-    *overflow: visible;  /* 4 */
+    -webkit-appearance: button;
+    cursor: pointer;
+    *overflow: visible;
 }
 #sitecuesFallback button::-moz-focus-inner {
     border: 0;
@@ -97,14 +94,14 @@ html, body {
     z-index:40001;
 	}
 #sitecuesFallback .vertical-offset { 
-    position:fixed;
-    top:30%;
-    width:100%;
-    z-index:40002;
+    position: fixed;
+    top: 30%;
+    width: 100%;
+    z-index: 40002;
 	}
 #sitecuesFallback .plainBoxWrap { 
-	margin:0 auto;
-	}
+	margin: 0 auto;
+}
 
 /* CSS FOR THE COMPATIBILITY FALLBACK WINDOW */
 #sitecuesFallback a.logoWrapper{
