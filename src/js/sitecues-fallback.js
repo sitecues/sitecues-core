@@ -81,16 +81,21 @@
       badge.style.margin.right = '0px !important';
       badge.style.margin.bottom = '0px !important';
       badge.style.margin.left = '0px !important';
-          
+
       badge.style.padding.top = '0px !important';
       badge.style.padding.right = '0px !important';
       badge.style.padding.bottom = '0px !important';
       badge.style.padding.left = '0px !important';
-          
+      
       badge.style.border.top = '0px !important';
       badge.style.border.right = '0px !important';
       badge.style.border.bottom = '0px !important';
       badge.style.border.left = '0px !important';
+
+
+      // badge.style.margin = '0px !important';
+      // badge.style.padding = '0px !important';  
+      // badge.style.border = '0px !important';
 
       //badge.style.outline = '0px !important';
       badge.style.position = ( (IEv >= 8) || (IEv == -1) ) ? 'fixed' : 'absolute';
@@ -112,6 +117,7 @@
     }
 
     function createBadge(success){
+      
       var badge = document.createElement('div');
       badge.id = 'sitecues-badge';
 
