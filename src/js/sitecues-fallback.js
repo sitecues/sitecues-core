@@ -50,7 +50,7 @@
         badge = document.getElementById('sitecues-badge'),
         fallback = document.getElementById('sitecuesFallback');
 
-    if (IEv <= 6) {
+    if (IEv > 0 && IEv <= 6) {
       importCSS(window.sitecues.fallbackBasePath + 'css/sitecues-fallback-lteie6.css')
     }
 
@@ -132,6 +132,7 @@
     };
 
     function createFallback(success) {
+
       /* load fallback styles */
       importCSS(window.sitecues.fallbackBasePath + 'css/sitecues-fallback.css');
 
