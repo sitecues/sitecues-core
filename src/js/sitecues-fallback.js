@@ -282,6 +282,6 @@
     )
   };    
   
-  init('require a more current version of your web browser.');
+  init('require a current version of a desktop browser.');
 
 })();
