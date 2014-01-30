@@ -191,7 +191,7 @@
                 
       btnExploreInt.type = 'button';
       btnExploreInt.className = 'btn btn-default';
-      btnExploreInt.href = '//www.sitecues.com/compatibility.php';
+      btnExploreInt.href = '//www.sitecues.com/compatibility';
       btnExploreInt.target = '_blank';
       btnExploreInt.innerHTML = 'Learn More';
             
