@@ -253,7 +253,7 @@
   function toggleFallbackModal() {
     var e = document.getElementById('sitecuesFallback');
 
-    console.log( e );
+    // console.log( e );
     
     if ((e.className.indexOf('active') > -1) ){
       e.className = 'close';
