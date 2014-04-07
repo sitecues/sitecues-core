@@ -80,7 +80,10 @@
 
       badge.style.margin = '0px !important';
       badge.style.padding = '0px !important';  
-      badge.style.border = '0px !important';
+      
+      if (badge.style.border) {
+        badge.style.border = '0px !important';
+      }
 
       //badge.style.outline = '0px !important';
       badge.style.position = ( (IEv >= 8) || (IEv == -1) ) ? 'fixed' : 'absolute';
