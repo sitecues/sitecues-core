@@ -2,10 +2,29 @@
 
   'use strict';
 
-  // In production the basepath will set before this script executes...
+  window.sitecues = window.sitecues || {};
+  var VERSION = 'UNVERSIONED';
+  sitecues.getFallbackVersion = function() {
+    return VERSION;
+  };
+
   if (!window.sitecues.fallbackBasePath) {
-    // ...but you will need to set the basepath here when in development.
-    window.sitecues.fallbackBasePath = '/sitecues-js-fallback/src/';
+  	// In deployed environments, the fallback path is deterministic,
+  	// and uses the same FQDN as the library...
+  	if (window.sitecues.config && window.sitecues.config.script_url) {
+  	  (function(){
+  	    var re = new RegExp('^(.*)://([^/]+)/l/s;id=([^/]+)/.*$', 'i');
+        var match = re.exec(window.sitecues.config.script_url);
+        if (match) {
+	        window.sitecues.fallbackBasePath = match[1] + '://' + match[2] + '/f/s;id=' + match[3] + '/';
+        }
+      })();
+  	}
+
+  	if (!window.sitecues.fallbackBasePath) {
+	    // ...otherwsie, assume development, and set the basepath here.
+    	window.sitecues.fallbackBasePath = '/sitecues-js-fallback/src/';
+    }
   }
 
   function getIEv() {
