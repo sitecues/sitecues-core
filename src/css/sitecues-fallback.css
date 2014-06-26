@@ -258,4 +258,23 @@
 #sitecuesFallback .btn-default:active,.btn-default.active,
 #sitecuesFallback .open .dropdown-toggle.btn-default{
 	background-image:none;
-	}
+}
+/* BEGIN: Reset Styles for Fallback Modal */
+#sitecuesFallback,
+#sitecuesFallback div, 
+#sitecuesFallback span,
+#sitecuesFallback p,
+#sitecuesFallback a,
+#sitecuesFallback strong {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  color:#000;
+}
+#sitecuesFallback {
+  line-height: 1;
+}
+/* END: Reset Styles for Fallback Modal */

@@ -125,7 +125,7 @@
       return badge;
     };
 
-    function createFallback(success) {
+    function createFallback (success) {
 
       /* load fallback styles */
       importCSS(window.sitecues.fallbackBasePath + 'css/sitecues-fallback.css');
