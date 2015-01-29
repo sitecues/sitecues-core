@@ -98,8 +98,8 @@
       */
 
       badge.style.margin = '0px !important';
-      badge.style.padding = '0px !important';  
-      
+      badge.style.padding = '0px !important';
+
       if (badge.style.border) {
         badge.style.border = '0px !important';
       }
@@ -109,7 +109,7 @@
       badge.style.top = '5px';
       badge.style.right = '20px';
       badge.style.zIndex = '2147483645';
-          
+
       badge.style.width = '150px';
       badge.style.transition = 'opacity 500ms';
       badge.style.boxSizing = 'content-box';
@@ -124,7 +124,7 @@
     }
 
     function createBadge(success){
-      
+
       var badge = document.createElement('div');
       badge.id = 'sitecues-badge';
 
@@ -153,7 +153,7 @@
       var fallback = mask = document.createElement('div');
           mask.id = 'sitecuesFallback';
           mask.className = 'close hide';
-      
+
       body.appendChild(mask);
 
       fallback.overlay = overlay = document.createElement('div');
@@ -161,7 +161,7 @@
       overlay.id = 'overlayMask';
 
       overlay.style.height = getDocHeight() + '200px';
-        
+
       if ( (IEv == 6) || (IEv == 7) || (IEv == 8) ){
         overlay.style.height = getDocHeight();
         overlay.style.opacity = '0.5';
@@ -175,13 +175,13 @@
       vertOffset.className = 'vertical-offset';
 
       mask.appendChild(vertOffset);
-      
+
       /* Modal div for fallback message */
       fallback.modal = modal = document.createElement('div');
       modal.id = 'sitecues-fallback-unsupported-browser';
       modal.className = 'plainBoxWrap';
       vertOffset.appendChild(modal);
-      
+
       /* Used a table for the message */
       fallback.table = messageHolder = document.createElement('div');
       messageHolder.id = 'unsupported-browser-warning';
@@ -199,24 +199,24 @@
       btnHolder.className = 'btn-group';
 
       messageHolder.appendChild(contentHolder);
-            
+
       fallback.btn1 = btnDismissInt = document.createElement('a');
-             
+
       btnDismissInt.type = 'button';
       btnDismissInt.className = 'btn btn-default';
       btnDismissInt.onclick = toggleFallbackModal;
       btnDismissInt.innerHTML = 'Dismiss';
-                
+
       btnDismiss.appendChild(btnDismissInt);
 
       fallback.btn2 = btnExploreInt = document.createElement('a');
-                
+
       btnExploreInt.type = 'button';
       btnExploreInt.className = 'btn btn-default';
-      btnExploreInt.href = '//www.sitecues.com/compatibility';
+      btnExploreInt.href = '//www.sitecues.com/compatibility.html';
       btnExploreInt.target = '_blank';
       btnExploreInt.innerHTML = 'Learn More';
-            
+
       btnExplore.appendChild(btnExploreInt);
 
       /* left table column - sitecues logo area */
@@ -231,7 +231,7 @@
       sitecuesLogo.src = window.sitecues.fallbackBasePath + 'img/no-sitecues-support-warning.png';
       sitecuesLogo.title = 'sitecues™ - unsupported browser image.';
       sitecuesLogo.alt = 'Visit sitecues.com for more information.';
-        
+
       /* Wrap the logo with an </a> for semantic html… */
       fallback.sitecuesLogoLinkWrap = sitecuesLogoLinkWrap = document.createElement('a');
       sitecuesLogoLinkWrap.className = 'logoWrapper';
@@ -276,7 +276,7 @@
     var e = document.getElementById('sitecuesFallback');
 
     // console.log( e );
-    
+
     if ((e.className.indexOf('active') > -1) ){
       e.className = 'close';
       /*
@@ -302,8 +302,8 @@
       D.body.offsetHeight, D.documentElement.offsetHeight,
       D.body.clientHeight, D.documentElement.clientHeight
     )
-  };    
-  
+  };
+
   init('require a current version of a desktop browser.');
 
 })();
