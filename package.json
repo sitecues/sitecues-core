@@ -1,0 +1,42 @@
+{
+  "name": "sitecues-js-fallback",
+  "version": "0.0.1",
+  "description": "Data collector for unsupported platforms",
+  "homepage": "https://bitbucket.org/ai_squared/sitecues-js-fallback#readme",
+  "main": "index.js",
+  "author": {
+    "name": "Seth Holladay",
+    "url": "http://seth-holladay.com",
+    "email": "me@seth-holladay.com"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ai_squared/sitecues-js-fallback.git"
+  },
+  "bugs": {
+    "url": "https://equinox.atlassian.net",
+    "email": "sitecuesdev@aisquared.com"
+  },
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "directories": {
+    "lib": "./lib"
+  },
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "devDependencies": {
+    "gulp": "gulpjs/gulp#4.0",
+    "pkg-dir": "1.0.0",
+    "build-dir": "0.3.1",
+    "rollup": "0.25.8"
+  },
+  "keywords": [
+    "fallback",
+    "metrics"
+  ]
+}
