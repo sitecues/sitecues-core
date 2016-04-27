@@ -7,7 +7,7 @@ const
 
 function build() {
     return rollup.rollup({
-            entry : 'lib/run.js'
+            entry : 'lib/start.js'
         })
         .then((bundle) => {
             return buildDir.prepare().then((dir) => {

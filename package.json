@@ -1,6 +1,6 @@
 {
   "name": "sitecues-js-fallback",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Data collector for unsupported platforms",
   "homepage": "https://bitbucket.org/ai_squared/sitecues-js-fallback#readme",
   "main": "index.js",
@@ -33,7 +33,7 @@
     "gulp": "gulpjs/gulp#4.0",
     "pkg-dir": "1.0.0",
     "build-dir": "0.3.1",
-    "rollup": "0.25.8"
+    "rollup": "0.26.0"
   },
   "keywords": [
     "fallback",
