@@ -3,11 +3,17 @@
 const
     rollup = require('rollup'),
     path = require('path'),
-    buildDir = require('build-dir');
+    buildDir = require('build-dir'),
+    babel = require("rollup-plugin-babel");
 
 function build() {
     return rollup.rollup({
-            entry : 'lib/start.js'
+            entry : 'lib/start.js',
+            plugins: [ 
+                babel({
+                    presets: 'es2015-rollup'
+                }) 
+            ]
         })
         .then((bundle) => {
             return buildDir.prepare().then((dir) => {
