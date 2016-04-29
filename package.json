@@ -34,7 +34,7 @@
     "build-dir": "0.3.1",
     "gulp": "gulpjs/gulp#4.0",
     "pkg-dir": "1.0.0",
-    "rollup": "0.26.0",
+    "rollup": "0.26.1",
     "rollup-plugin-babel": "2.4.0"
   },
   "keywords": [

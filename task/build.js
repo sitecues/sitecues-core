@@ -1,6 +1,7 @@
 'use strict';
 
 const
+    fs = require('fs'),
     rollup = require('rollup'),
     path = require('path'),
     buildDir = require('build-dir'),
@@ -24,6 +25,7 @@ function build() {
             return buildDir.prepare().then((dir) => {
                 return bundle.write({
                         format : 'iife',
+                        banner : fs.readFileSync('./lib/polyfill.js', 'utf8'),
                         dest   : path.join(dir.path, 'sitecues-fallback.js'),
                         sourceMap : true
                     })
