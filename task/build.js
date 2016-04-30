@@ -5,7 +5,7 @@ const
     rollup = require('rollup'),
     path = require('path'),
     buildDir = require('build-dir'),
-    babel = require("rollup-plugin-babel");
+    babel = require('rollup-plugin-babel');
 
 function build() {
     return rollup.rollup({
