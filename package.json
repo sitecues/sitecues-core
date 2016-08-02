@@ -1,8 +1,8 @@
 {
-  "name": "sitecues-js-fallback",
-  "version": "0.0.2",
-  "description": "Data collector for unsupported platforms",
-  "homepage": "https://bitbucket.org/ai_squared/sitecues-js-fallback#readme",
+  "name": "sitecues-core",
+  "version": "0.0.3",
+  "description": "Application launcher for Sitecues.",
+  "homepage": "https://github.com/sitecues/sitecues-core",
   "main": "index.js",
   "author": {
     "name": "Seth Holladay",
@@ -14,11 +14,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:ai_squared/sitecues-js-fallback.git"
+    "url": "git@github.com:sitecues/sitecues-core.git"
   },
   "bugs": {
-    "url": "https://equinox.atlassian.net",
-    "email": "sitecuesdev@aisquared.com"
+    "url": "https://github.com/sitecues/sitecues-core/issues",
+    "email": "me@seth-holladay.com"
   },
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
@@ -40,6 +40,12 @@
     "xo": "0.16.0"
   },
   "keywords": [
+    "capabilities",
+    "capability",
+    "feature",
+    "detection",
+    "launcher",
+    "core",
     "fallback",
     "metrics"
   ],

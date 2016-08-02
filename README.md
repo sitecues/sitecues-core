@@ -1,19 +1,33 @@
-Project
-===
+# sitecues-core
 
-The sitecues® Fallback JavaScript library (sitecues-fallback.js), is a basic library created to inform our users their device is not supported when we detect that our main codebase cannot run in their environment.
+> Application launcher for Sitecues.
 
-Documentation
----
+## Why?
 
-https://equinox.atlassian.net/wiki/pages/viewpage.action?pageId=23396371
+ - Computers and devices vary in capability.
+ - Variants of Sitecues must load based on device needs.
+ - Eligibility should be determined by feature detection.
 
-Deployment
----
+## Install
 
-This library manually deployed currently. Please contact SysOps or the Release Manager for more details.
+For customers, Sitecues Core is delivered by the implementation script. No additional setup is required.
 
-Build the Library
----
+A developer install involves cloning the project and running `npm install` once inside of it.
 
-See the `makfile` in the project root.
+## Usage
+
+Coming soon.
+
+## Contributing
+
+See our [contributing guidelines](https://github.com/sitecues/sitecues-core/blob/master/CONTRIBUTING.md "The guidelines for participating in this project.") for more details.
+
+1. [Fork it](https://github.com/sitecues/sitecues-core/fork).
+2. Make a feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. [Submit a pull request](https://github.com/sitecues/sitecues-core/compare "Submit code to this project for review.").
+
+## License
+
+Copyright © [Sitecues](https://sitecues.com "Owner of sitecues-core."). All rights reserved.
