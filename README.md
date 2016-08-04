@@ -1,4 +1,4 @@
-# sitecues-core
+# sitecues-core [![Build status for sitecues-core on Circle CI.](https://img.shields.io/circleci/project/sitecues/sitecues-core/master.svg "Circle Build Status")](https://circleci.com/gh/sitecues/sitecues-core "Sitecues Core Builds")
 
 > Application launcher for Sitecues.
 

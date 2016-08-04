@@ -1,8 +1,7 @@
 'use strict';
 
-const
-    gulp = require('gulp'),
-    build = require('./task/build');
+const gulp = require('gulp');
+const build = require('./task/build');
 
 gulp.task('build', build);
 
