@@ -20,6 +20,9 @@
     "url": "https://github.com/sitecues/sitecues-core/issues",
     "email": "me@seth-holladay.com"
   },
+  "engines": {
+    "node": ">=6"
+  },
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
   "directories": {
