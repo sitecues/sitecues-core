@@ -32,6 +32,10 @@
     "lib",
     "index.js"
   ],
+  "dependencies": {
+    "babel-polyfill": "6.13.0",
+    "whatwg-fetch": "1.0.0"
+  },
   "devDependencies": {
     "babel-preset-es2015-rollup": "1.1.1",
     "build-dir": "0.3.1",
@@ -40,6 +44,7 @@
     "pkg-dir": "1.0.0",
     "rollup": "0.34.3",
     "rollup-plugin-babel": "2.6.1",
+    "rollup-plugin-json": "2.0.1",
     "xo": "0.16.0"
   },
   "keywords": [
@@ -53,6 +58,7 @@
     "metrics"
   ],
   "xo": {
+    "env": "browser",
     "extend": "tidy"
   }
 }

@@ -4,18 +4,27 @@ const fs = require('fs');
 const path = require('path');
 const { rollup } = require('rollup');
 const buildDir = require('build-dir');
+const json = require('rollup-plugin-json');
 const babel = require('rollup-plugin-babel');
 const appName = require('../package.json').name;
 
-let polyfill;
+let banner;
 let bundle;
 let dir;
 
 const build = () => {
     return rollup({
-        entry   : 'lib/start.js',
+        entry   : 'lib/run.js',
         plugins : [
+            json({
+                include : [
+                    'package.json'
+                ]
+            }),
             babel({
+                exclude : [
+                    'node_modules/**'
+                ],
                 plugins : [
                     ['transform-es2015-classes', { loose : true }]
                 ],
@@ -27,8 +36,9 @@ const build = () => {
     })
         .then((bundleData) => {
             bundle = bundleData;
-            return new Promise((resolve, reject) => {
-                const polyfillPath = path.resolve(__dirname, '..', 'lib', 'polyfill.js');
+
+            const babelPolyfill = new Promise((resolve, reject) => {
+                const polyfillPath = require.resolve('babel-polyfill/dist/polyfill');
                 fs.readFile(polyfillPath, 'utf8', (err, content) => {
                     if (err) {
                         reject(err);
@@ -37,16 +47,32 @@ const build = () => {
                     resolve(content);
                 });
             });
+
+            const fetchPolyfill = new Promise((resolve, reject) => {
+                const fetchPath = require.resolve('whatwg-fetch');
+                fs.readFile(fetchPath, 'utf8', (err, content) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(content);
+                });
+            });
+
+            return Promise.all([
+                babelPolyfill,
+                fetchPolyfill
+            ]);
         })
-        .then((polyfilleData) => {
-            polyfill = polyfillData;
+        .then((polyfills) => {
+            banner = polyfills.join('');
             return buildDir.prepare();
         })
         .then((dirData) => {
             dir = dirData;
             return bundle.write({
                 format    : 'iife',
-                banner    : polyfill,
+                banner,
                 dest      : path.join(dir.path, appName + '.js'),
                 sourceMap : true
             });
