@@ -59,6 +59,14 @@
   ],
   "xo": {
     "env": "browser",
-    "extend": "tidy"
+    "extend": "tidy",
+    "global": [
+      "sitecues"
+    ],
+    "ignore": [
+      "build/**",
+      "latest-build/**",
+      "lib/uuid.js"
+    ]
   }
 }
