@@ -12,6 +12,19 @@ let banner;
 let bundle;
 let dir;
 
+const readDep = (depName) => {
+    return new Promise((resolve, reject) => {
+        const filePath = require.resolve(depName);
+        fs.readFile(filePath, 'utf8', (err, content) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(content);
+        });
+    });
+};
+
 const build = () => {
     return rollup({
         entry   : 'lib/run.js',
@@ -37,31 +50,9 @@ const build = () => {
         .then((bundleData) => {
             bundle = bundleData;
 
-            const babelPolyfill = new Promise((resolve, reject) => {
-                const polyfillPath = require.resolve('babel-polyfill/dist/polyfill');
-                fs.readFile(polyfillPath, 'utf8', (err, content) => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
-                    resolve(content);
-                });
-            });
-
-            const fetchPolyfill = new Promise((resolve, reject) => {
-                const fetchPath = require.resolve('whatwg-fetch');
-                fs.readFile(fetchPath, 'utf8', (err, content) => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
-                    resolve(content);
-                });
-            });
-
             return Promise.all([
-                babelPolyfill,
-                fetchPolyfill
+                readDep('babel-polyfill/dist/polyfill'),
+                readDep('whatwg-fetch')
             ]);
         })
         .then((polyfills) => {
