@@ -1,4 +1,4 @@
-# sitecues-core [![Build status for sitecues-core on Circle CI.](http://circleci-badges-max.herokuapp.com/img/sitecues/sitecues-core/master?token=acc2259949dc35d324ffff96186e5874a4b1ef4f "Circle Build Status")](https://circleci.com/gh/sitecues/sitecues-core "Sitecues Core Builds")
+# sitecues-core [![Build status for sitecues-core on Circle CI.](http://circleci-badges-max.herokuapp.com/img/sitecues/sitecues-core?token=acc2259949dc35d324ffff96186e5874a4b1ef4f "Circle Build Status")](https://circleci.com/gh/sitecues/sitecues-core "Sitecues Core Builds")
 
 > Application launcher for Sitecues.
 
