@@ -58,15 +58,20 @@
     "metrics"
   ],
   "xo": {
-    "env": "browser",
     "extend": "tidy",
-    "global": [
-      "sitecues"
-    ],
     "ignore": [
       "build/**",
       "latest-build/**",
       "lib/uuid.js"
+    ],
+    "overrides": [
+      {
+        "files": "lib/**",
+        "env": "browser",
+        "global": [
+          "sitecues"
+        ]
+      }
     ]
   }
 }
