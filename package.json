@@ -10,7 +10,8 @@
     "email": "me@seth-holladay.com"
   },
   "scripts": {
-    "test": "xo"
+    "test": "xo",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -38,10 +39,11 @@
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.2.0",
-    "build-dir": "^0.7.1",
+    "delivr": "^0.2.0",
     "eslint-config-tidy": "^0.3.2",
     "gulp": "gulpjs/gulp#4.0",
     "pkg-dir": "^1.0.0",
+    "read-pkg-up": "^1.0.1",
     "rollup": "^0.34.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-json": "^2.0.1",

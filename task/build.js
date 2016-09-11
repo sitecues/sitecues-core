@@ -3,14 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const { rollup } = require('rollup');
-const buildDir = require('build-dir');
+const delivr = require('delivr');
 const json = require('rollup-plugin-json');
 const babel = require('rollup-plugin-babel');
-const appName = require('../package.json').name;
-
-let banner;
-let bundle;
-let dir;
+const appName = require('read-pkg-up').sync(__dirname).pkg.name;
 
 const readDep = (depName) => {
     return new Promise((resolve, reject) => {
@@ -26,7 +22,7 @@ const readDep = (depName) => {
 };
 
 const build = () => {
-    return rollup({
+    const bundleConf = {
         entry   : 'lib/run.js',
         plugins : [
             json({
@@ -46,33 +42,29 @@ const build = () => {
                 ]
             })
         ]
-    })
-        .then((bundleData) => {
-            bundle = bundleData;
+    };
 
-            return Promise.all([
-                readDep('babel-polyfill/dist/polyfill'),
-                readDep('whatwg-fetch')
-            ]);
-        })
-        .then((polyfills) => {
-            banner = polyfills.join('');
-            return buildDir.prepare();
-        })
-        .then((dirData) => {
-            dir = dirData;
-            return bundle.write({
-                format    : 'iife',
-                banner,
-                dest      : path.join(dir.path, appName + '.js'),
-                sourceMap : true
+    let finalize;
+    return rollup(bundleConf).then((bundle) => {
+        return Promise.all([
+            readDep('babel-polyfill/dist/polyfill'),
+            readDep('whatwg-fetch')
+        ]).then((polyfills) => {
+            return delivr.prepare({ bucket : appName }).then((dir) => {
+                finalize = dir.finalize;
+                return bundle.write({
+                    format    : 'iife',
+                    banner    : polyfills.join(''),
+                    dest      : path.join(dir.path, appName + '.js'),
+                    sourceMap : true
+                });
             });
-        })
-        .then(() => {
+        }).then(() => {
             // Move the temp dir to its permanent home and set up
             // latest links.
-            return dir.finalize();
+            return finalize();
         });
+    });
 };
 
 module.exports = build;
