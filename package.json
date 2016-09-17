@@ -63,8 +63,7 @@
     "extend": "tidy",
     "ignore": [
       "build/**",
-      "latest-build/**",
-      "lib/uuid.js"
+      "latest-build/**"
     ],
     "overrides": [
       {
