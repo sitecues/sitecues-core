@@ -23,7 +23,7 @@ const readDep = (depName) => {
 
 const build = () => {
     const bundleConf = {
-        entry   : 'lib/run.js',
+        entry   : 'lib/js/run.js',
         plugins : [
             json({
                 include : [
