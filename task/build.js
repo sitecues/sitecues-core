@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const { rollup } = require('rollup');
 const delivr = require('delivr');
+const buildVersion = require('build-version');
+const replace = require('rollup-plugin-replace');
+
 const json = require('rollup-plugin-json');
 const babel = require('rollup-plugin-babel');
 const appName = require('read-pkg-up').sync(__dirname).pkg.name;
@@ -44,13 +47,32 @@ const build = () => {
         ]
     };
 
+    let version;
+    const createBundle = () => {
+        return buildVersion().then((ver) => {
+            version = ver;
+            bundleConf.plugins.unshift(replace({
+                include    : 'lib/js/meta.js',
+                delimiters : ['<@', '@>'],
+                values     : {
+                    BUILD_VERSION : version
+                }
+            }));
+            return rollup(bundleConf);
+        });
+    };
+
     let finalize;
-    return rollup(bundleConf).then((bundle) => {
+    return createBundle().then((bundle) => {
         return Promise.all([
-            readDep('babel-polyfill/dist/polyfill'),
-            readDep('whatwg-fetch')
-        ]).then((polyfills) => {
-            return delivr.prepare({ bucket : appName }).then((dir) => {
+            'babel-polyfill/dist/polyfill',
+            'whatwg-fetch'
+        ].map(readDep)).then((polyfills) => {
+            const delivrConfig = {
+                version,
+                bucket : appName
+            };
+            return delivr.prepare(delivrConfig).then((dir) => {
                 finalize = dir.finalize;
                 return bundle.write({
                     format    : 'iife',

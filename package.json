@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.2.0",
+    "build-version": "^0.2.2",
     "delivr": "^0.2.1",
     "eslint-config-tidy": "^0.3.2",
     "gulp": "gulpjs/gulp#4.0",
@@ -47,6 +48,7 @@
     "rollup": "^0.35.12",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-json": "^2.0.1",
+    "rollup-plugin-replace": "^1.1.1",
     "xo": "^0.16.0"
   },
   "keywords": [
