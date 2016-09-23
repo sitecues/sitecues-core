@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sitecues Global Storage</title>
+    </head>
+    <body>
+        <script>
+            (function () {
+                var namespace = 'sitecues';
+
+                // Overwrite the entire namespace that we use for storing data.
+                // You should probably NOT use this! Prefer setAll().
+                function setAllRaw(dataString) {
+                    // Safari throws an exception in Private Browsing mode.
+                    // There is no reasonable way to recover from this.
+                    try {
+                        localStorage.setItem(namespace, dataString);
+                    } catch () {}
+                }
+
+                // Get value of the entire namespace that we use for storing data.
+                // You should probably NOT use this! Prefer getAll().
+                function getAllRaw() {
+                    return localStorage.getItem(namespace);
+                }
+
+                // Get the final representation that we will put into storage.
+                function serialize(data) {
+                    return JSON.stringify(data || {});
+                }
+
+                // Get the normalized representation of what was in storage.
+                function deserialize(dataString) {
+                    return dataString ? JSON.parse(dataString) : {};
+                }
+
+                // Friendly API for overwriting all data we have put into storage.
+                function setAll(data) {
+                    setAllRaw(serialize(data));
+                }
+
+                // Friendly API for retrieving all data we have put into storage.
+                // Returns an object.
+                function getAll() => {
+                    return deserialize(getAllRaw());
+                }
+
+                // Merge some new data into the existing store, with the
+                // new data taking precedence.
+                function set(input) {
+                    var appData = getAll();
+                    // TODO: Use Object.assign() when we drop IE support.
+                    Object.keys(input).forEach(function (key) {
+                        appData[key] = input[key];
+                    });
+                    setAll(appData);
+                }
+
+                function resolveUrl(url) {
+                    var parser = document.createElement('a');
+                    parser.href = url;
+                    // The parser now has a resolved href.
+                    return parser.href;
+                }
+
+                function parseUrl(url){
+                    var parser = document.createElement('a');
+                    parser.href = url;
+                    // IE is rude and doesn't give us an origin.
+                    if (parser.origin) {
+                        parser.origin = parser.protocol + '//' + parser.host;
+                    }
+
+                    return parser;
+                }
+
+                function getQueryValue(name) {
+                    var query = location.search.substring(1);
+                    var pairs = query.split('&');
+                    for (var i = 0; i < pairs.length; i++) {
+                        var pair = pairs[i].split('=');
+                        if (pair[0] === name) {
+                            return pair[1];
+                        }
+                    }
+                    return null;
+                }
+
+                // Send a message back to the parent page.
+                function postMessage(event, input) {
+                    var data = {
+                        isSitecues : true
+                    };
+                    Object.keys(input).forEach(function (key) {
+                        data[key] = input[key];
+                    });
+                    event.source.postMessage(data, event.origin);
+                }
+
+                // Send a response with optional payload to the parent window.
+                function reply(event, payload) {
+                    var data = {};
+                    if (payload) {
+                        data.payload = payload;
+                    }
+                    postMessage(event, data);
+                }
+
+                // Send an error response to the parent window.
+                function replyError(event, err) {
+                    console.error('Sitecues global storage error:', err);
+
+                    postMessage(event, {
+                        error : err
+                    });
+                }
+
+                function onMessage(event) {
+                    // The whole point of this page is to be loaded within a child iframe.
+                    // If we are loaded directly or someone who is not the parent is
+                    // talking to us, something fishy is happening. Fail silently.
+                    if (parent === window || event.source !== parent || !event.data.isSitecues) {
+                        return;
+                    }
+
+                    var action = event.data.action;
+
+                    if (action === 'getAll') {
+                        reply(event, getAll());
+                    }
+                    else if (action === 'setAll') {
+                        setAll(event.data.payload);
+                        reply(event);
+                    }
+                    else if (action === 'set') {
+                        set(event.data.payload);
+                        reply(event);
+                    }
+                    else {
+                        replyError(event, new Error('An action to take is required.'));
+                    }
+                }
+
+                addEventListener('message', onMessage, true);
+            }());
+        </script>
+    </body>
+</html>
