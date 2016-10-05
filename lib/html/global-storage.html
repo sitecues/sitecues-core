@@ -15,7 +15,7 @@
                     // There is no reasonable way to recover from this.
                     try {
                         localStorage.setItem(namespace, dataString);
-                    } catch () {}
+                    } catch (err) {}
                 }
 
                 // Get value of the entire namespace that we use for storing data.
@@ -41,7 +41,7 @@
 
                 // Friendly API for retrieving all data we have put into storage.
                 // Returns an object.
-                function getAll() => {
+                function getAll() {
                     return deserialize(getAllRaw());
                 }
 
