@@ -62,36 +62,36 @@ const build = () => {
         });
     };
 
-    let finalize;
-    return createBundle().then((bundle) => {
-        return Promise.all([
+    return Promise.all([
+        createBundle(),
+        Promise.all([
             'babel-polyfill/dist/polyfill',
             'whatwg-fetch'
-        ].map(readDep)).then((polyfills) => {
-            const delivrConfig = {
-                version,
-                bucket : appName
-            };
-            return delivr.prepare(delivrConfig).then((dir) => {
-                finalize = dir.finalize;
-                return Promise.all([
-                    cpy(['{html,css,img}/**'], dir.path, {
-                        cwd     : 'lib',
-                        parents : true,
-                        nodir   : true
-                    }),
-                    bundle.write({
-                        format    : 'iife',
-                        banner    : polyfills.join(''),
-                        dest      : path.join(dir.path, 'js', 'sitecues.js'),
-                        sourceMap : true
-                    })
-                ]);
+        ].map(readDep))
+    ]).then((prereq) => {
+        const [bundle, polyfills] = prereq;
+        const delivrConfig = {
+            version,
+            bucket : appName
+        };
+        return delivr.prepare(delivrConfig).then((dir) => {
+            return Promise.all([
+                cpy(['{html,css,img}/**'], dir.path, {
+                    cwd     : 'lib',
+                    parents : true,
+                    nodir   : true
+                }),
+                bundle.write({
+                    format    : 'iife',
+                    banner    : polyfills.join(''),
+                    dest      : path.join(dir.path, 'js', 'sitecues.js'),
+                    sourceMap : true
+                })
+            ]).then(() => {
+                // Move the temp dir to its permanent home and set up
+                // latest links.
+                return dir.finalize();
             });
-        }).then(() => {
-            // Move the temp dir to its permanent home and set up
-            // latest links.
-            return finalize();
         });
     });
 };

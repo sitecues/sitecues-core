@@ -42,15 +42,15 @@
     "build-version": "^0.2.2",
     "cpy": "^4.0.1",
     "delivr": "^0.4.0",
-    "eslint-config-tidy": "^0.3.2",
+    "eslint-config-tidy": "^0.4.0",
     "gulp": "gulpjs/gulp#4.0",
     "pkg-dir": "^1.0.0",
-    "read-pkg-up": "^1.0.1",
+    "read-pkg-up": "^2.0.0",
     "rollup": "^0.36.1",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-json": "^2.0.1",
     "rollup-plugin-replace": "^1.1.1",
-    "xo": "^0.16.0"
+    "xo": "^0.17.0"
   },
   "keywords": [
     "capabilities",
@@ -64,10 +64,6 @@
   ],
   "xo": {
     "extend": "tidy",
-    "ignore": [
-      "build/**",
-      "latest-build/**"
-    ],
     "overrides": [
       {
         "files": "lib/**",
