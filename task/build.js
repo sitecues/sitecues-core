@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const cpy = require('cpy');
 const delivr = require('delivr');
-const buildVersion = require('build-version');
+const buildData = require('build-data');
 const appName = require('read-pkg-up').sync(__dirname).pkg.name;
 const { rollup } = require('rollup');
 const json = require('rollup-plugin-json');
@@ -47,14 +47,17 @@ const build = () => {
         ]
     };
 
+    let branch;
     let version;
     const createBundle = () => {
-        return buildVersion().then((ver) => {
-            version = ver;
+        return buildData().then((data) => {
+            branch = data.branch;
+            version = data.version;
             bundleConf.plugins.unshift(replace({
                 include    : 'lib/js/meta.js',
                 delimiters : ['<@', '@>'],
                 values     : {
+                    BUILD_BRANCH : branch,
                     BUILD_VERSION : version
                 }
             }));
@@ -71,6 +74,7 @@ const build = () => {
     ]).then((prereq) => {
         const [bundle, polyfills] = prereq;
         const delivrConfig = {
+            branch,
             version,
             bucket : appName
         };
