@@ -57,7 +57,7 @@ const build = () => {
                 include    : 'lib/js/meta.js',
                 delimiters : ['<@', '@>'],
                 values     : {
-                    BUILD_BRANCH : branch,
+                    BUILD_BRANCH  : branch,
                     BUILD_VERSION : version
                 }
             }));
