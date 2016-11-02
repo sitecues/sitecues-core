@@ -8,22 +8,6 @@
             (function () {
                 var namespace = 'sitecues';
 
-                // Overwrite the entire namespace that we use for storing data.
-                // You should probably NOT use this! Prefer setAll().
-                function setAllRaw(dataString) {
-                    // Safari throws an exception in Private Browsing mode.
-                    // There is no reasonable way to recover from this.
-                    try {
-                        localStorage.setItem(namespace, dataString);
-                    } catch (err) {}
-                }
-
-                // Get value of the entire namespace that we use for storing data.
-                // You should probably NOT use this! Prefer getAll().
-                function getAllRaw() {
-                    return localStorage.getItem(namespace);
-                }
-
                 // Get the final representation that we will put into storage.
                 function serialize(data) {
                     return JSON.stringify(data || {});
@@ -34,15 +18,20 @@
                     return dataString ? JSON.parse(dataString) : {};
                 }
 
-                // Friendly API for overwriting all data we have put into storage.
+                // Overwrite the entire namespace that we use for storing data.
                 function setAll(data) {
-                    setAllRaw(serialize(data));
+                    var dataString = serialize(data);
+                    // Safari throws an exception in Private Browsing mode.
+                    // There is no reasonable way to recover from this.
+                    try {
+                        localStorage.setItem(namespace, dataString);
+                    } catch (err) {}
                 }
 
-                // Friendly API for retrieving all data we have put into storage.
+                // Get value of the entire namespace that we use for storing data.
                 // Returns an object.
                 function getAll() {
-                    return deserialize(getAllRaw());
+                    return deserialize(localStorage.getItem(namespace));
                 }
 
                 // Merge some new data into the existing store, with the
@@ -54,36 +43,6 @@
                         appData[key] = input[key];
                     });
                     setAll(appData);
-                }
-
-                function resolveUrl(url) {
-                    var parser = document.createElement('a');
-                    parser.href = url;
-                    // The parser now has a resolved href.
-                    return parser.href;
-                }
-
-                function parseUrl(url){
-                    var parser = document.createElement('a');
-                    parser.href = url;
-                    // IE is rude and doesn't give us an origin.
-                    if (parser.origin) {
-                        parser.origin = parser.protocol + '//' + parser.host;
-                    }
-
-                    return parser;
-                }
-
-                function getQueryValue(name) {
-                    var query = location.search.substring(1);
-                    var pairs = query.split('&');
-                    for (var i = 0; i < pairs.length; i++) {
-                        var pair = pairs[i].split('=');
-                        if (pair[0] === name) {
-                            return pair[1];
-                        }
-                    }
-                    return null;
                 }
 
                 // Send a message back to the parent page.
