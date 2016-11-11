@@ -50,7 +50,7 @@
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-json": "^2.0.1",
     "rollup-plugin-replace": "^1.1.1",
-    "url-polyfill": "github:sitecues/url-polyfill",
+    "url-polyfill": "sitecues/url-polyfill",
     "xo": "^0.17.0"
   },
   "keywords": [
