@@ -69,6 +69,7 @@ const build = () => {
         createBundle(),
         Promise.all([
             'babel-polyfill/dist/polyfill',
+            'url-polyfill',
             'whatwg-fetch'
         ].map(readDep))
     ]).then((prereq) => {
