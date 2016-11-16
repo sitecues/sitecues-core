@@ -1,6 +1,6 @@
 {
   "name": "sitecues-core",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Application launcher for Sitecues.",
   "homepage": "https://github.com/sitecues/sitecues-core",
   "main": "index.js",
