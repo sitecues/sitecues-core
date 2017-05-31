@@ -24,7 +24,7 @@ const readDep = (depName) => {
     });
 };
 
-const build = () => {
+const build = async () => {
     const bundleConf = {
         entry   : 'lib/js/run.js',
         plugins : [
@@ -49,56 +49,55 @@ const build = () => {
 
     let branch;
     let version;
-    const createBundle = () => {
-        return buildData().then((data) => {
-            branch = data.branch;
-            version = data.version;
-            bundleConf.plugins.unshift(replace({
-                include    : 'lib/js/meta.js',
-                delimiters : ['<@', '@>'],
-                values     : {
-                    BUILD_BRANCH  : branch,
-                    BUILD_VERSION : version
-                }
-            }));
-            return rollup(bundleConf);
-        });
+    const createBundle = async () => {
+        const data = await buildData();
+        branch = data.branch;
+        version = data.version;
+        bundleConf.plugins.unshift(replace({
+            include    : 'lib/js/meta.js',
+            delimiters : ['<@', '@>'],
+            values     : {
+                BUILD_BRANCH  : branch,
+                BUILD_VERSION : version
+            }
+        }));
+        return rollup(bundleConf);
     };
 
-    return Promise.all([
+    const [bundle, polyfills] = await Promise.all([
         createBundle(),
         Promise.all([
             'babel-polyfill/dist/polyfill',
             'url-polyfill',
             'whatwg-fetch'
         ].map(readDep))
-    ]).then((prereq) => {
-        const [bundle, polyfills] = prereq;
-        const delivrConfig = {
-            branch,
-            version,
-            bucket : appName
-        };
-        return delivr.prepare(delivrConfig).then((dir) => {
-            return Promise.all([
-                cpy(['{html,css,img}/**'], dir.path, {
-                    cwd     : 'lib',
-                    parents : true,
-                    nodir   : true
-                }),
-                bundle.write({
-                    format    : 'iife',
-                    banner    : polyfills.join(''),
-                    dest      : path.join(dir.path, 'js', 'sitecues.js'),
-                    sourceMap : true
-                })
-            ]).then(() => {
-                // Move the temp dir to its permanent home and set up
-                // latest links.
-                return dir.finalize();
-            });
-        });
-    });
+    ]);
+
+    const delivrConfig = {
+        branch,
+        version,
+        bucket : appName
+    };
+
+    const dir = await delivr.prepare(delivrConfig);
+
+    await Promise.all([
+        cpy(['{html,css,img}/**'], dir.path, {
+            cwd     : 'lib',
+            parents : true,
+            nodir   : true
+        }),
+        bundle.write({
+            format    : 'iife',
+            banner    : polyfills.join(''),
+            dest      : path.join(dir.path, 'js', 'sitecues.js'),
+            sourceMap : true
+        })
+    ]);
+
+    // Move the temp dir to its permanent home and set up
+    // latest links.
+    return dir.finalize();
 };
 
 module.exports = build;
