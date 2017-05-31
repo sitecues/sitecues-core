@@ -22,7 +22,7 @@
     "email": "me@seth-holladay.com"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=7.6"
   },
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
@@ -35,23 +35,23 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.13.0",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "babel-preset-es2015-rollup": "^1.2.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
     "build-data": "^0.3.1",
-    "cpy": "^4.0.1",
+    "cpy": "^5.0.0",
     "delivr": "^0.4.0",
     "eslint-config-tidy": "^0.4.0",
     "gulp": "gulpjs/gulp#4.0",
-    "pkg-dir": "^1.0.0",
+    "pkg-dir": "^2.0.0",
     "read-pkg-up": "^2.0.0",
-    "rollup": "^0.36.1",
+    "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-json": "^2.0.1",
     "rollup-plugin-replace": "^1.1.1",
     "url-polyfill": "sitecues/url-polyfill",
-    "xo": "^0.17.0"
+    "xo": "^0.18.2"
   },
   "keywords": [
     "capabilities",
